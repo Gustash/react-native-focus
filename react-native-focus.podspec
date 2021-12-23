@@ -12,8 +12,17 @@ Pod::Spec.new do |s|
 
   s.platforms    = { :ios => "10.0" }
   s.source       = { :git => "https://github.com/Gustash/react-native-focus.git", :tag => "#{s.version}" }
+  
+  s.source_files = "ios/Shared/**/*.{h,m,mm}"
+  s.default_subspec = "Core"
 
-  s.source_files = "ios/**/*.{h,m,mm}"
+  s.subspec "Core" do |ss|
+    ss.source_files = "ios/Core/**/*.{h,m,mm}"
+    ss.dependency "React-Core"
+  end
 
-  s.dependency "React-Core"
+  s.subspec "Extension" do |ss|
+    ss.source_files = "ios/Extension/**/*.{h,m,mm}"
+    s.frameworks = "Intents"
+  end
 end

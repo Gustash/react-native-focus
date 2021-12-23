@@ -7,6 +7,8 @@
 
 #import "AppDelegate.h"
 
+#import <UserNotifications/UserNotifications.h>
+
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -48,6 +50,17 @@ static void InitializeFlipper(UIApplication *application) {
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+  [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionBadge + UNAuthorizationOptionSound)
+                        completionHandler:^(BOOL granted, NSError * _Nullable error) {
+    if (error != nil) {
+      NSLog(@"Error requesting notification permission: %@", [error localizedDescription]);
+      return;
+    }
+    
+    NSLog(@"User notifications permission: %@", granted ? @"GRANTED" : @"DENIED");
+  }];
   return YES;
 }
 
