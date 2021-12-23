@@ -1,4 +1,5 @@
 #import "FocusStatusIntentHandler.h"
+#import "Constants.h"
 
 @implementation FocusStatusIntentHandler
 
@@ -7,7 +8,7 @@
 {
     BOOL isFocused = [intent.focusStatus.isFocused boolValue];
     NSUserDefaults *userDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.example.reactnativefocus"];
-    [userDefaults setBool:isFocused forKey:@"react-native-focus/isFocused"];
+    [userDefaults setBool:isFocused forKey:IsFocusedStorageKey];
     
     INShareFocusStatusIntentResponse *response = [[INShareFocusStatusIntentResponse alloc]
                                                   initWithCode:INShareFocusStatusIntentResponseCodeSuccess
