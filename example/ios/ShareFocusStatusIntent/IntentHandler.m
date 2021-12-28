@@ -8,10 +8,6 @@
 #import "IntentHandler.h"
 #import <react-native-focus/FocusStatusIntentHandler.h>
 
-@interface IntentHandler ()
-
-@end
-
 @implementation IntentHandler
 
 - (id)handlerForIntent:(INIntent *)intent {
@@ -21,8 +17,17 @@
     return self;
 }
 
-- (void)handleShareFocusStatus:(nonnull INShareFocusStatusIntent *)intent
-                    completion:(nonnull void (^)(INShareFocusStatusIntentResponse * _Nonnull))completion {
+@end
+
+@interface IntentHandler (FocusStatus) <INShareFocusStatusIntentHandling>
+
+@end
+
+@implementation IntentHandler (FocusStatus)
+
+- (void)handleShareFocusStatus:(INShareFocusStatusIntent *)intent
+                    completion:(void (^)(INShareFocusStatusIntentResponse * _Nonnull))completion
+{
   [FocusStatusIntentHandler handleShareFocusStatus:intent completion:completion];
 }
 

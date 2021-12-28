@@ -2,11 +2,30 @@
 
 Get iOS Focus status information in React Native
 
+## WIP
+
+This package is still a WIP and not ready for production use!
+
 ## Installation
 
 ```sh
 npm install react-native-focus
 ```
+
+or
+
+
+```sh
+yarn add react-native-focus
+```
+
+## Linking
+
+This package auto-links to your main Target. You **need** to create an `Intent Extension` to use the focus status listener.
+
+Follow [these instructions](./CREATE_INTENTS_EXTENSION.md) to get that setup.
+
+Run `pod install` on your `ios/` folder.
 
 ## Usage
 

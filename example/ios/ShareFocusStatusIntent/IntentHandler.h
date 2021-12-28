@@ -7,6 +7,6 @@
 
 #import <Intents/Intents.h>
 
-@interface IntentHandler : INExtension <INShareFocusStatusIntentHandling>
+@interface IntentHandler : INExtension
 
 @end
