@@ -16,7 +16,7 @@ export default function App() {
     getCurrentFocusStatus()
   );
 
-  const authorizationText = React.useMemo(() => {
+  const authorizationText = React.useMemo<string>(() => {
     switch (authorization) {
       case AuthorizationStatus.Authorized:
         return 'Authorized';
@@ -26,6 +26,8 @@ export default function App() {
         return 'Not Determined';
       case AuthorizationStatus.Restricted:
         return 'Restricted';
+      default:
+        return '';
     }
   }, [authorization]);
 
