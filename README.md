@@ -6,10 +6,6 @@ This library only works on iOS. Running this library's code on Android will resu
 
 Make sure you only run this code after you've verified the current platform is iOS.
 
-## WIP
-
-This package is still a WIP and not ready for production use!
-
 ## Installation
 
 ```sh
