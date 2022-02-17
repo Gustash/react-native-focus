@@ -5,10 +5,23 @@ const LINKING_ERROR =
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo managed workflow\n';
+const PLATFORM_ERROR =
+  "The package 'react-native-focus' is for iOS only. Make sure you check the running platform before executing it's code.";
 
-const Focus = NativeModules.Focus
-  ? NativeModules.Focus
-  : new Proxy(
+const Focus = (() => {
+  if (Platform.OS !== 'ios') {
+    return new Proxy(
+      {},
+      {
+        get() {
+          throw new Error(PLATFORM_ERROR);
+        },
+      }
+    );
+  }
+
+  if (!NativeModules.Focus) {
+    return new Proxy(
       {},
       {
         get() {
@@ -16,6 +29,10 @@ const Focus = NativeModules.Focus
         },
       }
     );
+  }
+
+  return NativeModules.Focus;
+})();
 const Emitter = new NativeEventEmitter(Focus);
 
 export enum AuthorizationStatus {
