@@ -10,12 +10,10 @@
   "files": [
     "src",
     "lib",
-    "android",
     "ios",
     "cpp",
     "react-native-focus.podspec",
     "!lib/typescript/example",
-    "!android/build",
     "!ios/build",
     "!**/__tests__",
     "!**/__fixtures__",
@@ -34,7 +32,9 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "ios-15",
+    "focus",
+    "do-not-disturb"
   ],
   "repository": "https://github.com/Gustash/react-native-focus",
   "author": "Gustavo Parreira <gustavotcparreira@gmail.com> (https://github.com/Gustash)",
