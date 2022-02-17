@@ -23,6 +23,6 @@ Pod::Spec.new do |s|
 
   s.subspec "Extension" do |ss|
     ss.source_files = "ios/Extension/**/*.{h,m,mm}"
-    s.frameworks = "Intents"
+    ss.frameworks = "Intents"
   end
 end
