@@ -23,12 +23,37 @@ Create your Share Extension (preferably in Objective-C, otherwise you'll need to
 Open your project's `Podfile` and add the following:
 
 ```ruby
-  target '<YOUR_EXTENSION_TARGET_NAME>' do
+target '<YOUR_EXTENSION_TARGET_NAME>' do
     pod 'react-native-focus/Extension', :path => '../..'
 end
 ```
 
 Run `pod install` on the `ios/` folder.
+
+## Handle Focus Status Intent
+
+Open your Extension's `Info.plist` and add the following:
+
+```plist
+<key>NSExtension</key>
+<dict>
+    <key>NSExtensionAttributes</key>
+    <dict>
+        <key>IntentsRestrictedWhileLocked</key>
+        <array/>
+        <key>IntentsSupported</key>
+        <array>
+            <string>INShareFocusStatusIntent</string>
+        </array>
+    </dict>
+    <key>NSExtensionPointIdentifier</key>
+    <string>com.apple.intents-service</string>
+    <key>NSExtensionPrincipalClass</key>
+    <string>IntentHandler</string>
+</dict>
+```
+
+**Without this your Extension won't be alerted about Focus Status changes, therefore the JS listener will not work as well.**
 
 ## App Group Setup
 

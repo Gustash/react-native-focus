@@ -27,33 +27,11 @@ Follow [these instructions](./CREATE_INTENTS_EXTENSION.md) to get that setup.
 
 Run `pod install` on your `ios/` folder.
 
-## Usage
+## Setup
 
-```ts
-import { requestAuthorization, } from "react-native-focus";
+Open your app's `Info.plist` and add a `NSFocusStatusUsageDescription` key. The value should be a `String` describing to the user why your app needs permission to access the Focus Status.
 
-// ...
-
-const result = await multiply(3, 7);
-```
-
-## Contributing
-
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-## TODO
-
-### Extension
-
-Info.plist -> INShareFocusStatusIntent
-Needs `react-native-focus/Extension` pod in Podfile target
-
-```objc
-- (void)handleShareFocusStatus:(nonnull INShareFocusStatusIntent *)intent
-                    completion:(nonnull void (^)(INShareFocusStatusIntentResponse * _Nonnull))completion {
-  [FocusStatusIntentHandler handleShareFocusStatus:intent completion:completion];
-}
-```
+To allow the focus status listener to work, refer to the [Create Intents Extension README](./CREATE_INTENTS_EXTENSION.md).
 
 ## API
 
@@ -92,7 +70,7 @@ Get the current focus status.
 
 Needs to have called `requestAuthorization()` and received `AuthorizationStatus.Authorized`, first.
 
-This will not be updated when the focus status changes. You should use this for initialization only. Refer to CHANGEME
+This will not be updated when the focus status changes. You should use this for initialization only. Refer to the [Create Intents Extension README](./CREATE_INTENTS_EXTENSION.md).
 
 **Returns**
 
@@ -112,7 +90,7 @@ Registers a listener that will get called whenever the focus status has changed.
 
 Needs to have called `requestAuthorization()` and received `AuthorizationStatus.Authorized`, first.
 
-Needs the Intents Extension to have been setup. Refer to CHANGEME
+Needs the Intents Extension to have been setup. Refer to the [Create Intents Extension README](./CREATE_INTENTS_EXTENSION.md).
 
 **Arguments**
 
@@ -137,16 +115,9 @@ const removeListener = addFocusStatusChangeListener(listener);
 removeListener();
 ```
 
-### App
+## Contributing
 
-Info.plist -> NSFocusStatusUsageDescription
-
-Needs Notification permissions
-Needs Communication Notifications entitlement
-
-### Workspace
-
-Need to implement dynamic app groups
+See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
 ## License
 
