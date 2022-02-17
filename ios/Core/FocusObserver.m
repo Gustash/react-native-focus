@@ -11,7 +11,9 @@
 {
     self = [super init];
     self->delegate = delegate;
-    self->userDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.example.reactnativefocus"];
+    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
+    NSString *suiteName = [NSString stringWithFormat:@"group.%@.RNFocus", bundleIdentifier];
+    self->userDefaults = [[NSUserDefaults alloc] initWithSuiteName:suiteName];
     [self addFocusStatusObserver];
     return self;
 }

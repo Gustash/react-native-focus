@@ -3,11 +3,23 @@
 
 @implementation FocusStatusIntentHandler
 
-+ (void)handleShareFocusStatus:(INShareFocusStatusIntent *)intent
+- (NSString *)appBundleIdentifier
+{
+    NSBundle *bundle = [NSBundle mainBundle];
+    if ([[bundle.bundleURL pathExtension] isEqualToString:@"appex"]) {
+        bundle = [NSBundle bundleWithURL:[[bundle.bundleURL URLByDeletingLastPathComponent] URLByDeletingLastPathComponent]];
+    }
+    
+    return [bundle bundleIdentifier];
+}
+
+- (void)handleShareFocusStatus:(INShareFocusStatusIntent *)intent
                     completion:(void (^)(INShareFocusStatusIntentResponse * _Nonnull))completion
+API_AVAILABLE(ios(15.0))
 {
     BOOL isFocused = [intent.focusStatus.isFocused boolValue];
-    NSUserDefaults *userDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.com.example.reactnativefocus"];
+    NSString *suiteName = [NSString stringWithFormat:@"group.%@.RNFocus", [self appBundleIdentifier]];
+    NSUserDefaults *userDefaults = [[NSUserDefaults alloc] initWithSuiteName:suiteName];
     [userDefaults setBool:isFocused forKey:IsFocusedStorageKey];
     
     INShareFocusStatusIntentResponse *response = [[INShareFocusStatusIntentResponse alloc]
