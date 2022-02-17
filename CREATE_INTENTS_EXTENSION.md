@@ -10,7 +10,6 @@ Before your extension can handle the relevant intent, it needs a couple of pre-r
 
 3. Focus permission. You can request this permission using `requestAuthorization()`.
 
-
 ## Create Intents Extension target
 
 To create an Intent Extension, open your project's `.xcworkspace` in Xcode.
@@ -31,19 +30,21 @@ end
 
 Run `pod install` on the `ios/` folder.
 
+## App Group Setup
+
+For the Extension to be able to relay events to your app, you need to add an App Group to your App and Extension targets.
+
+To do so, open your App Target Settings > Signing & Capabilities > + Capability > App Groups.
+
+Then add a new App Group with the following format: `group.<YOUR_BUNDLE_ID>.RNFocus` (e.g. `group.com.example.reactnativefocus.RNFocus`).
+
+**Repeat this step for your Extension!**
+
 ## Handle Intent
 
 To handle the intent you first need to tell iOS that your extension handles the `INShareFocusStatusIntent`.
 
 To do so, open your Extension's `Info.plist` and add `INShareFocusStatusIntent` to `NSExtension -> NSExtensionAttributes -> IntentsSupported`.
-
-Open `IntentHandler.h` and change the interface to the following:
-
-```objc
-// IntentHandler.h
-
-@interface IntentHandler : INExtension <INShareFocusStatusIntentHandling>
-```
 
 Open `IntentHandler.m` and add the following code:
 
@@ -54,20 +55,18 @@ Open `IntentHandler.m` and add the following code:
 
 // (...)
 
-@interface IntentHandler (FocusStatus) <INShareFocusStatusIntentHandling>
+@implementation IntentHandler
 
-@end
+- (id)handlerForIntent:(INIntent *)intent {
+    (...)
 
-@implementation IntentHandler (FocusStatus)
+    if ([intent isKindOfClass:[INShareFocusStatusIntent class]]) {
+        return [[FocusStatusIntentHandler alloc] init];
+    }
 
-- (void)handleShareFocusStatus:(INShareFocusStatusIntent *)intent
-                    completion:(void (^)(INShareFocusStatusIntentResponse * _Nonnull))completion
-{
-  [FocusStatusIntentHandler handleShareFocusStatus:intent completion:completion];
+    (...)
 }
 ```
-
-## TODO: Document App Groups
 
 ## Warning
 
