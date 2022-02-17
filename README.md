@@ -33,6 +33,10 @@ Open your app's `Info.plist` and add a `NSFocusStatusUsageDescription` key. The 
 
 To allow the focus status listener to work, refer to the [Create Intents Extension README](./CREATE_INTENTS_EXTENSION.md).
 
+## Usage
+
+Refer to the [Example Project](./example/) for a simple usage of the library.
+
 ## API
 
 ### `AuthorizationStatus`
