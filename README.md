@@ -125,4 +125,4 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 
 ## License
 
-GNU GPLv3
+GNU LGPLv3
