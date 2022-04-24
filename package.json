@@ -38,7 +38,7 @@
   ],
   "repository": "https://github.com/Gustash/react-native-focus",
   "author": "Gustavo Parreira <gustavotcparreira@gmail.com> (https://github.com/Gustash)",
-  "license": "LGPL-3.0-or-later",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Gustash/react-native-focus/issues"
   },
